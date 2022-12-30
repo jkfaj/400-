@@ -210,3 +210,30 @@ if __name__ == '__main__':
 
     #await main()
     #main()
+
+import os
+#_7=datetime.now()
+#to_trans_acc="C:\\Users\\Administrator\\Desktop\\test2\\chunks\\"
+#to_save_trans="C:\\Users\\Administrator\\Desktop\\test2\\转wav\\"
+import subprocess
+
+namelist,urllist,silencelist,threshlist=single()
+    
+
+for num in range(0,len(namelist),1):
+
+    accfile2=to_split_path+namelist[num]+'\\'
+    #to_save_trans=wavpath+namelist[num]+'\\'
+
+    for i in os.listdir(accfile2):
+        if i.endswith('.aac'):
+            trans_name=accfile2+i
+            print(trans_name)
+            save_name=accfile2+os.path.splitext(i)[0]+'.mp3'
+            print(save_name)
+            code='ffmpeg  -i ' +trans_name+' -acodec libmp3lame '+save_name
+            os.system(code)
+            #删除aac
+            os.remove(trans_name)
+#1
+print('acc转为mp3格式转换完成')
